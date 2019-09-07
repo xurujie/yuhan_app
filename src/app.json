@@ -1,0 +1,99 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/logs/main",
+    "pages/productList/main",
+    "pages/product/main",
+    "pages/my/main",
+    "pages/activity/main",
+    "pages/shopping/main",
+    "pages/register/main",
+    "pages/login/main",
+    "pages/order/main",
+    "pages/orderDetail/main",
+    "pages/checkOrder/main",
+    "pages/joinUs/main",
+    "pages/recharge/main",
+    "pages/vipInfo/main",
+    "pages/dayly/main",
+    "pages/goods/main",
+    "pages/gift/main",
+    "pages/newMember/main",
+    "pages/insureOrder/main"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999",
+    "backgroundColor": "#fafafa",
+    "selectedColor": "#333",
+    "borderStyle": "white",
+    "list": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/main",
+        "iconPath": "static/tabs/index.png",
+        "selectedIconPath": "static/tabs/index-active.png"
+      },
+      {
+        "text": "活动特卖",
+        "pagePath": "pages/activity/main",
+        "iconPath": "static/tabs/activity.png",
+        "selectedIconPath": "static/tabs/activity-active.png"
+      },
+      {
+        "text": "购物车",
+        "pagePath": "pages/shopping/main",
+        "iconPath": "static/tabs/shopping.png",
+        "selectedIconPath": "static/tabs/shopping-active.png"
+      },
+      {
+        "text": "个人中心",
+        "pagePath": "pages/my/main",
+        "iconPath": "static/tabs/my.png",
+        "selectedIconPath": "static/tabs/my-active.png"
+      }
+    ],
+    "items": [
+      {
+        "text": "首页",
+        "pagePath": "pages/index/main",
+        "iconPath": "static/tabs/index.png",
+        "selectedIconPath": "static/tabs/index-active.png"
+      },
+      {
+        "text": "活动特卖",
+        "pagePath": "pages/activity/main",
+        "iconPath": "static/tabs/activity.png",
+        "selectedIconPath": "static/tabs/activity-active.png"
+      },
+      {
+        "text": "购物车",
+        "pagePath": "pages/shopping/main",
+        "iconPath": "static/tabs/shopping.png",
+        "selectedIconPath": "static/tabs/shopping-active.png"
+      },
+      {
+        "text": "个人中心",
+        "pagePath": "pages/my/main",
+        "iconPath": "static/tabs/my.png",
+        "selectedIconPath": "static/tabs/my-active.png"
+      }
+    ],
+    "position": "bottom"
+  },
+  "permission": {
+    "pages": [
+      "pages/index/main",
+      "pages/my/main"
+    ],
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  }
+
+}

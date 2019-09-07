@@ -1,0 +1,9 @@
+{
+  "navigationStyle":"default",
+  "navigationBarTextStyle":"black",
+  "navigationBarTitleText": "确认订单",
+  "usingComponents": {
+    
+    "van-switch": "/static/vant/switch/index"
+  }
+}

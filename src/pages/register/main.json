@@ -1,0 +1,9 @@
+
+  {
+    "navigationStyle":"default",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "注册",
+    "usingComponents": {
+      "van-toast": "/static/vant/toast/index"
+    }
+  }

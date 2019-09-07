@@ -1,0 +1,12 @@
+{
+  "usingComponents": {
+    "van-cell": "/static/vant/cell/index",
+    "van-cell-group": "/static/vant/cell-group/index",
+    "van-popup": "/static/vant/popup/index",
+    "van-tab": "/static/vant/tab/index",
+    "van-tabs": "/static/vant/tabs/index"
+  },
+  "navigationStyle": "default",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "商品详情页"
+}
