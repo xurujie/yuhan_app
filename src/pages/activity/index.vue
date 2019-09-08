@@ -7,7 +7,7 @@
       <div class="header-item">折扣</div>
     </div>
     <div class="main">
-      <activity-item type="score"></activity-item>
+      <activity-item type="score" v-for="(item, index) in proList" :key="index" :pro="item"></activity-item>
     </div>
   </div>
 </template>
@@ -17,11 +17,34 @@ import activityItem from '@/components/activityItem'
 export default {
   data() {
     return {
-
+      pageSize:10,
+      pageNumber:1,
+      proList:[],
+      count:12
     }
   },
+  mounted() {
+    this.init()
+  },
+  onReachBottom() {
+    this.pageNumber++
+    this.init()
+  },
+  async onPullDownRefresh() {
+    this.proList=[]
+    this.pageNumber =1
+    await this.init()
+    wx.stopPullDownRefresh()
+  },
   methods: {
-    
+   async init() {
+     let first = this.pageSize*(this.pageNumber-1)
+     let end = this.pageSize*this.pageNumber
+     if(end>this.count) return
+     let res = await this.$api.getGoods({first,end})
+     this.count = res.data.count
+     this.proList =this.proList.concat(res.data.ListArray) 
+   }
   },
   components: {
     activityItem
@@ -49,6 +72,13 @@ page{
         color: #4C4C4C;
         margin-top: 6px;
       }
+    }
+    .main {
+      padding: 0 10px;
+      display: flex;
+      width: 100%;
+      // justify-content: space-between;
+      flex-wrap: wrap;
     }
   }
 </style>

@@ -1,14 +1,14 @@
 <template>
   <div class="activityItem ">
     <div class="imgbox line-b">
-      <img src="../assets/img/proImg.png" alt="" class="proImg">
+      <img :src="pro.grouppictures" alt="" class="proImg">
     </div>
     <div class="content">
-      <div class="title c-21 fz9 "> 宠儿香 康源益生菌5g*24 猫犬通用 </div>
+      <div class="title c-21 fz9 "> {{pro.merchandise}} </div>
       <div class="footer" v-if="type=='price'">
         <img src="../assets/icon/vip-small.png" class="vip">
-        <div class="c-ff fz12">¥5.5</div>
-        <div class="c-666 fz8">¥15.5</div>
+        <div class="c-ff fz12">¥{{pro.price}}</div>
+        <div class="c-666 fz8">¥{{pro.originalprice}}</div>
         <img src="../assets/icon/shopCar.png" class="shopCar">
       </div>
       <div class="score" v-if="type== 'score'">
@@ -43,6 +43,11 @@ export default {
   .activityItem {
     width: 113px;
     background-color: #fff;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
       .imgbox {
         padding: 0 15px;
         .proImg {

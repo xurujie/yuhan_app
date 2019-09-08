@@ -6,5 +6,6 @@
     "van-search": "/static/vant/search/index",
     "van-icon": "/static/vant/icon/index"
 
-  }
+  },
+  "navigationStyle": "custom"
 }

@@ -28,10 +28,7 @@ export default {
       wx.navigateTo({url:'../register/main'})
     },
     async login() {
-      console.log('11111')
       let res = await this.$api.login({tel:this.tel,password:this.password})
-      console.log('22222')
-      console.log(res,111)
       // wx.request({
       //   url:'http://127.0.0.1:3001/v1/login',
       //   method:'post',

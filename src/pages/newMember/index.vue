@@ -24,8 +24,11 @@ export default {
     }
   },
   methods: {
+    async init() {
+      let res = await this.$api.getNewMember()
+    },
     joinVip() {
-      wx.navigateTo({url:''})
+      wx.navigateTo({url:'../joinUs/main'})
     }
   },
 }

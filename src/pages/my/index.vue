@@ -6,24 +6,24 @@
       <div class="header-content">
         <div class="top">
           <div class="headImg ">
-            <img :src="user.avatarUrl" class="avatar">
+            <img :src="user.user_img" class="avatar">
             <img src="../../assets/icon/icon-vip.png" alt="" class="tag">
           </div>
           <div class="c-fff fz9">
-            <p class="fz14 mb-6">昵称：<span>{{user.nickName}}</span></p>
-            <p class="vipNumber">会员编号：<span></span></p>
-            <p>淘宝ID：<span></span></p>
+            <p class="fz14 mb-6">昵称：<span>{{user.user_name}}</span></p>
+            <p class="vipNumber" v-if="user.vip_id">会员编号：<span>{{user.vip_id}}</span></p>
+            <p>淘宝ID：<span>{{user.taobao_name}}</span></p>
           </div>
         </div>
         <div class="m-nav">
-            <div class="m-nav-item c-fff fz10"><p class="fz15">0</p><span>余额</span></div>
-            <div class="m-nav-item c-fff fz10"><p class="fz15">0</p><span>优惠券</span></div>
-            <div class="m-nav-item c-fff fz10"><p class="fz15">0</p><span>积分</span></div>
-            <div class="m-nav-item c-fff fz10"><p class="fz15">0</p><span>抵用金额</span></div>
-            <div class="m-nav-item c-fff fz10"><p class="fz15">0</p><span>收藏夹</span></div>
+            <div class="m-nav-item c-fff fz10"><p class="fz15">{{user.balance_account}}</p><span>余额</span></div>
+            <div class="m-nav-item c-fff fz10"><p class="fz15">{{user.discount_id}}</p><span>优惠券</span></div>
+            <div class="m-nav-item c-fff fz10"><p class="fz15">{{user.account_integral}}</p><span>积分</span></div>
+            <div class="m-nav-item c-fff fz10"><p class="fz15">{{user.refund}}</p><span>抵用金额</span></div>
+            <div class="m-nav-item c-fff fz10"><p class="fz15">{{user.favoritesinformation_id}}</p><span>收藏夹</span></div>
         </div>
         <div class="m-vip">
-          <img src="../../assets/img/vip-dark.png" alt="">
+          <img src="../../assets/img/vip-dark.png" v-if="user.yuchong_vip==1">
           <div class="btn"></div>
         </div>
       </div>
@@ -39,7 +39,7 @@
        <div class="my-nav-item" @click="goDetail('vip')"><img src="../../assets/icon/c8.png" ><p class="c-2a fz13">我的会员卡</p></div>
      </div>
      <div class="my-footer">
-       <img src="../../assets/img/new.png" alt="">
+       <img src="../../assets/img/new.png" alt="" @click="goNew">
      </div>
   </div>
 </template>
@@ -60,35 +60,38 @@ export default {
     //   })
   },
   onShow() {
-    if(!this.$store.state.isLogin) {
-      this.checkLogin()
+    let sessionId = wx.getStorageSync('sessionId')
+    let userId = wx.getStorageSync('userId')
+    console.log(sessionId,userId,'my')
+    if(sessionId &&userId) {
+      // this.checkLogin()
+      this.init()
     }else {
-      this.user = this.$store.state.userInfo
-      console.log(this.user)
+      wx.navigateTo({url:'../login/main'})
+      // this.user = this.$store.state.userInfo
+      // console.log(this.user)
 
     }
   },
   mounted() {
-    this.init()
+    // this.init()
   },
   methods: {
     async init() {
      let res = await this.$api.myData()
-     console.log(res,88)
-     if(res.msg="Success") {
-
-     }
+     this.user = res.data.UserInformation
+     
     },
     goDetail(data) {
       switch(data) {
         case 'pay':
-          wx.navigateTo({url:'../order/main?type=pay'})
+          wx.navigateTo({url:'../order/main?type=2'})
           break
         case 'receive':
-          wx.navigateTo({url:'../order/main?type='})
+          wx.navigateTo({url:'../order/main?type=4'})
           break
         case 'commen':
-          wx.navigateTo({url:'../order/main?type='})
+          wx.navigateTo({url:'../order/main?type=5'})
           break
         case 'refund':
           wx.navigateTo({url:'../order/main?type='})         
@@ -105,7 +108,6 @@ export default {
         case 'vip':
           wx.navigateTo({url:'../order/main?type='})
           break
-
       }
      
     },
@@ -117,6 +119,9 @@ export default {
           }
         }
       })
+    },
+    goNew() {
+      wx.navigateTo({url:'../newMember/main'})
     }
   }
 

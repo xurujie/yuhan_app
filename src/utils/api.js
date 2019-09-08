@@ -25,4 +25,55 @@ export default {
   async myData(data) {
     return await request('/User/Main', 'post', data)
   },
+  async shopCarList(data) {
+    return await request('/ShoppingTrolley/list', 'post', data)
+  },
+  async getMyInfo(data) {
+    return await request('/User/Main post', 'post', data)
+  },
+  async getCatigray(data) {
+    return await request('/Merchandise/Type', 'post', data)
+  },
+  async getDaly(data) {
+    return await request('/User/SignIn', 'post', data)
+  },
+  async getExchange(data) {
+    return await request('/Integral/list', 'post', data)
+  },
+  async getGoods(data) {
+    return await request('/RecommendMerchandise/Type', 'post', data)
+  },
+  async getNewMember(data) {
+    return await request('/newUser/DiscountCoupon', 'post', data)
+  },
+  async getJoin(data) {
+    return await request('/Issue', 'post', data)
+  },
+  async getOrderAll(data) {
+    return await request('/Order/List', 'post', data)
+  },
+  async getOrderDetail(data) {
+    return await request('/Order/ById', 'post', data)
+  },
+  async getToPay(data) {
+    return await request('/Order/List/get1', 'post', data)
+  },
+  async getToSend(data) {
+    return await request('/Order/List/get2', 'post', data)
+  },
+  async getToReceive(data) {
+    return await request('/Order/List/get3', 'post', data)
+  },
+  async getTocomment(data) {
+    return await request('/Order/List/get4', 'post', data)
+  },
+  async getOrderDetail(data) {
+    return await request('/Order/ById', 'post', data)
+  },
+  async merchandiseImg(data) {
+    return await request('/MerchandiseImg/Type', 'post', data)
+  },
+  async getEx(data) {
+    return await request('/Integral/Details', 'post', data)
+  },
 }

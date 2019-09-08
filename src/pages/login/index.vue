@@ -29,9 +29,9 @@ export default {
     },
     async login() {
       let res = await this.$api.login({userName:this.tel,passWord:this.password})
-      console.log(res.data,888)
       if(res.data&&res.data.userId) {
-        console.log('aaa')
+        // this.$store.commit('setUser','login')
+        wx.setStorageSync('userId',res.data.userId)
         wx.switchTab({url:'../index/main'})
       }
      

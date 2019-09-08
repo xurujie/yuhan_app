@@ -48,6 +48,7 @@ export default {
     .pro-img {
       width: 120px;
       height: 115px;
+      margin-right: 10px;
       img {
         width: 100%;
         height: 100%;

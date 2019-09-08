@@ -1,8 +1,8 @@
 <template>
   <div class="order-detail">
-    <div class="order-item bg-f mb-10">
+    <!-- <div class="order-item bg-f mb-10">
       <div class="content line-b pr">
-        <img src="../../assets/img/slider-item.png" class="pro-img">
+        <img src="" class="pro-img">
         <div class="c-64 fz13 pro-right">
           <h5 class="mb-10">【宠儿香】 康源益生菌5g*25 猫犬通用</h5>
           <p class="fz13 pro-sie mb-10"><span>规格：5g*25</span> <span>猫犬通用</span></p>
@@ -13,62 +13,81 @@
       <div class="footer text-r">
         <span class="c-2a fz13">实付款：</span><span class="c-ef fz20">1530.00</span>
       </div>
-    </div>
+    </div> -->
+    <order-item :show="false" :orderList="orderList" :showBtn="true"></order-item>
     <div class="order-info bg-f">
       <div class="order-info-item  line-b df">
         <p>收货人</p>
-        <span>周某某</span>
+        <span>{{address.recipient}}</span>
       </div>
       <div class="order-info-item  line-b df">
-        <p>收货人</p>
-        <span>周某某</span>
+        <p>联系方式</p>
+        <span>{{address.tel}}</span>
       </div>
       <div class="order-info-item line-b  df">
-        <p>收货人</p>
-        <span>周某某</span>
+        <p>收货地址</p>
+        <span>{{address.capital}}省 {{address.city}}市 {{address.district}}区 {{address.indetail}}</span>
       </div>
       <div class="order-info-item line-b  df">
-        <p>收货人</p>
-        <span>周某某</span>
+        <p>订单号</p>
+        <span>{{orderList[0].orderNumber}}</span>
       </div>
       <div class="order-info-item  line-b df">
-        <p>收货人</p>
-        <span>周某某</span>
+        <p>创建时间</p>
+        <span>{{}}</span>
       </div>
       <div class="order-info-item line-b df">
-        <p>收货人</p>
-        <span>周某某</span>
+        <p>下单时间</p>
+        <span>{{}}</span>
       </div>
-      <div class="order-info-item line-b df">
-        <p>收货人</p>
-        <span>周某某</span>
-      </div>
-      <div class="order-info-item line-b df">
-        <p>收货人</p>
-        <span>周某某</span>
-      </div>
-      <div class="order-info-item line-b df">
-        <p>收货人</p>
-        <span>周某某</span>
-      </div>
-      <div class="order-info-item df">
-        <p>收货人</p>
-        <span>周某某</span>
+      <div v-if="orderList[0].status==1">
+        <div class="order-info-item line-b df">
+          <p>发货时间</p>
+          <span>{{express.shipments}}</span>
+        </div>
+        <div class="order-info-item line-b df">
+          <p>发货状态</p>
+          <span v-if="orderList[0].status==1">未发货</span>
+          <span v-else>已发货</span>
+        </div>
+        <div class="order-info-item line-b df">
+          <p>快递类型</p>
+          <span>{{express.express_type}}</span>
+        </div>
+        <div class="order-info-item df">
+          <p>快递单号</p>
+          <span>{{express.express_number}}</span>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import orderItem from '@/components/orderItem'
 export default {
   data() {
     return {
-
+      address:{},
+      orderList:[],
+      express:{},
     }
   },
-  methods: {
-    
+  mounted() {
+    this.init()
   },
+  methods: {
+    async init() {
+      let res = await this.$api.getOrderDetail({orderNumber:this.$root.$mp.query.orderNumber})
+      console.log(res,999)
+      this.address = res.data.Profile
+      this.orderList = res.data.OrderById
+      this.express = res.data.Express
+    }
+  },
+  components:{
+    orderItem
+  }
 }
 </script>
 
@@ -109,7 +128,8 @@ export default {
         margin: 0 10px;
         background-color: #fff;
         p {
-          width: 51px;
+          width: 70px;
+          font-size: 13px;
         }
       }
     }

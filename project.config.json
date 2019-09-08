@@ -185,6 +185,27 @@
 					"id": -1,
 					"name": "pages/my/main",
 					"pathName": "pages/my/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/exchange/main",
+					"pathName": "pages/exchange/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/cat/main",
+					"pathName": "pages/cat/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/dog/main",
+					"pathName": "pages/dog/main",
 					"scene": null
 				}
 			]

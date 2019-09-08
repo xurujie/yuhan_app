@@ -1,10 +1,10 @@
 <template>
-  <div class="seckill-item" @click="handleClick">
+  <div class="buy-item" @click="handleClick">
     <div class="img-box">
       <img :src="seck.grouppictures" alt="" class="pro-img">
       <img src="../assets/icon/miaosha.png" alt="" class="icon-ms" v-if="showKill">
     </div>
-    <div class="seckill-item-info">
+    <div class="buy-item-info">
       <div class="info-title ">{{seck.merchandise}}</div>
       <div class="price">
         <span class="icon-money">¥</span>
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style lang="less">
-.seckill-item {
+.buy-item {
   width: 113px;
   padding-bottom: 7px;
   height: auto;
@@ -46,7 +46,7 @@ export default {
     margin-right: 0;
   }
   .img-box {
-    padding: 11px 15px 48px 15px;
+    padding: 11px 15px 10px 15px;
     position: relative;
     border-bottom: 1px solid #ccc;
     .pro-img {
@@ -61,7 +61,7 @@ export default {
       bottom: 0;
     }
   }
-  .seckill-item-info{
+  .buy-item-info{
     position: relative;
     font-size: 9px;
     padding: 0 5px;

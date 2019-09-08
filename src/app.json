@@ -19,12 +19,15 @@
     "pages/goods/main",
     "pages/gift/main",
     "pages/newMember/main",
+    "pages/exchange/main",
+    "pages/dog/main",
+    "pages/cat/main",
     "pages/insureOrder/main"
   ],
   "window": {
     "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#fff",
-    "navigationStyle": "custom",
+    
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

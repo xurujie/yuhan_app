@@ -6,37 +6,37 @@
     </div>
     <div class="adress bg-f">
       <div class="left">
-        <img src="" alt="">
+        <!-- <img src="" alt=""> -->
         <div >
-          <h5 class="fz15">XXX</h5>
-          <p class="fz10"> xx省xx市xx区xxxxxx </p>
+          <h5 class="fz15">{{address.recipient}}</h5>
+          <p class="fz10"> {{address.capital}}省 {{address.city}}市 {{address.district}}区 {{address.indetail}}</p>
         </div>
       </div>
-      <div class="right fz10 c-2a">17666666666</div>
+      <div class="right fz10 c-2a">{{address.tel}}</div>
     </div>
     <div class="order-item mg-10 bg-f">
       <div class="title c-64 fz13 line-b df-b">
           <span>煜宠商城品牌直营：</span>
-          <div class="df tel">
+          <div class="df tel" @click="callServer">
             <img src="../../assets/icon/tel.png" alt="">
             <p class="c-fb fz10">联系客服</p>
           </div>
       </div>
-      <div class="content ">
+      <!-- <div class="content ">
         <img src="../../assets/img/slider-item.png" class="pro-img">
         <div class="c-64 fz13 pro-right">
           <h5 class="mb-10">【宠儿香】 康源益生菌5g*25 猫犬通用</h5>
           <p class="fz13 pro-sie mb-10"><span>规格：5g*25</span> <span>猫犬通用</span></p>
           <div class="c-ef mb-10"><span class="fz9">¥</span><span class="fz20 pro-price">150.00</span> <span class="fz15 c-64">×50</span></div>
           <img src="../../assets/img/detail-ser.png" class="pro-label mb-10">
-          <!-- <div class="fz13 text-r">已发货</div> -->
         </div>
-      </div>
+      </div> -->
+      <order-item :show="false" :orderList="orderList"></order-item>
     </div>
-    <div class="total  bg-f text-r mb-10 mg-10">
+    <!-- <div class="total  bg-f text-r mb-10 mg-10">
       <span class="fz13 c-2a">共50件商品 合计：</span>
       <span class="fz20 c-ef">¥750.00</span>
-    </div>
+    </div> -->
 
     <div class="p-order-info mg-10 bg-f">
       <div class="p-order-item fz13 c-2a line-b"><p>订单号：</p><span class="c-64">201805071121305569</span></div>
@@ -53,15 +53,33 @@
 </template>
 
 <script>
+import orderItem from '@/components/orderItem'
 export default {
   data() {
     return {
-
+      address:{},
+      orderList:[],
+      express:{},
     }
   },
-  methods: {
-    
+  mounted() {
+    this.init()
   },
+  methods: {
+    async init() {
+      let res = await this.$api.getOrderDetail({orderNumber:this.$root.$mp.query.orderNumber})
+      this.address = res.data.Profile
+      this.orderList = res.data.OrderById
+    },
+    callServer() {
+      wx.makePhoneCall({
+        phoneNumber: '17735363779' 
+      })
+    }
+  },
+  components: {
+    orderItem
+  }
 }
 </script>
 

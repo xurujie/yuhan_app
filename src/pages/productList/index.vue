@@ -42,20 +42,20 @@
       </div>
     </div>
     <div class="jionUs line-b">
-      <img src="../../assets/icon/join.png" alt="">
+      <img src="../../assets/icon/join.png" alt="" @click="goVip">
     </div>
 
     <!-- 产品列表 -->
     <div class="proList-cotent">
       <div class="product-item" v-for="(pro, index) in seckillList" :key="index">
-        <div class="pro-img">
-          <img src="../../assets/img/proImg.png" alt="">
+        <div class="pro-img mr-20">
+          <img :src="pro.grouppictures" alt="">
         </div>
         <div class="pro-info">
-          <div class="pro-title">{{pro.title}}</div>
-          <div class="pro-des">{{pro.des}}</div>
+          <div class="pro-title">{{pro.merchandise}}</div>
+          <div class="pro-des">{{pro.suitableobject}}</div>
           <div class="pro-price mb-6">
-            <span class="pro-sale-price"><span class="fz9">¥</span> {{pro.salePrice}}</span>
+            <span class="pro-sale-price"><span class="fz9">¥</span> {{pro.price}}</span>
             <span class="icon-vip-samll"><img src="../../assets/icon/vip-small.png" alt=""></span>
             <span class="pro-old-price">¥{{pro.oldPrice}}</span>
           </div>
@@ -98,18 +98,26 @@ export default {
       showPri:true,
       showSel:true,
       showPop:false,
-      seckillList:[
-        {title:'宠儿香 康源益生菌5g*24 猫犬通用',img:require('../../assets/img/proImg.png'),salePrice:'19.9',oldPrice:'39.9',des:'宠儿香 康源益生菌5g*24 猫犬通用'},
-        {title:'宠儿香 康源益生菌5g*24 猫犬通用',img:require('../../assets/img/proImg.png'),salePrice:'19.9',oldPrice:'39.9',des:'宠儿香 康源益生菌5g*24 猫犬通用'},
-        {title:'宠儿香 康源益生菌5g*24 猫犬通用',img:require('../../assets/img/proImg.png'),salePrice:'19.9',oldPrice:'39.9',des:'宠儿香 康源益生菌5g*24 猫犬通用'},
-      ]
+      pageSize:10,
+      pageNumber:1,
+      count:16,
+      seckillList:[ ]
     }
   },
   mounted() {
     let type = this.$root.$mp.query.type
-    console.log(type,"------")
+    this.init()
   },
   methods: {
+    async init(){
+      let first = this.pageSize*(this.pageNumber-1)
+      let end = this.pageNumber*this.pageSize
+      if(end>this.count) return
+      let res = await this.$api.getCatigray({type:'0009',first,end})
+      this.seckillList = res.data.ListArray
+      this.count = res.data.count || ''
+      
+    },
     clickAll() {
       this.showIcon = !this.showIcon
     },
@@ -122,6 +130,9 @@ export default {
     },
     onClose() {
       this.showPop = false
+    },
+    goVip() {
+      wx.navigateTo({url:'../joinUs/main'})
     }
   },
   component: {

@@ -42,7 +42,7 @@
       </div>
       <div class=" cell-item fz13 border-b">
         <div class="cell-text">会员</div>
-        <div class="c-64 vip"><img src="../../assets/icon/vip-small.png" alt=""><span>会员预计可节省{{product.price-product.vip_price}}元</span></div>
+        <div class="c-64 vip"><img src="../../assets/icon/vip-small.png" alt=""><span>会员预计可节省{{calcRes}}元</span></div>
         <div class="cell-right">
           <span class="fz13 c-64" @click="goVip">立即开卡</span>
           <div class="arrow-right pr"></div>
@@ -158,6 +158,11 @@ export default {
     },
     goShopCar() {
        wx.switchTab({url:'../shopping/main'})
+    }
+  },
+  computed: {
+    calcRes() {
+      return Math.floor(this.product.price-this.product.vip_price)
     }
   },
   component: {

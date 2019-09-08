@@ -4,7 +4,6 @@ export default {
     let userInfo = wx.getStorageSync('userInfo')
     if(userInfo) {
       this.$store.commit('setUser',userInfo)
-      console.log(userInfo,'storage')
 
     }
   } 

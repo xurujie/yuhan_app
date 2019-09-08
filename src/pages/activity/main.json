@@ -1,5 +1,7 @@
 {
   "navigationStyle":"default",
   "navigationBarTextStyle":"black",
-  "navigationBarTitleText": "活动专区"
+  "navigationBarTitleText": "活动特卖",
+  "enablePullDownRefresh": true
+  
 }

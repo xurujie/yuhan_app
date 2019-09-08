@@ -4,7 +4,7 @@
 const baseUrl = 'http://49.234.133.200:8001'
 
 export function request(url, method = "GET", data,config={}) {
-  console.log('token', wx.getStorageSync('token'));
+  console.log('sessionId', wx.getStorageSync('sessionId'));
   return new Promise(function (resolve, reject) {
     wx.request({
       url: baseUrl+url,
@@ -13,7 +13,7 @@ export function request(url, method = "GET", data,config={}) {
       header: {
         // 'Content-Type': 'application/json',
         'Content-Type': 'application/x-www-form-urlencoded',
-        // 'X-Token': wx.getStorageSync('token').token
+        'Cookie': 'JSESSIONID='+ wx.getStorageSync('sessionId')
       },
       success: function (res) {
         wx.hideLoading()

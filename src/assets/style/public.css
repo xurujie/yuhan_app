@@ -60,6 +60,9 @@
 .fz8 {
   font-size: 8px;
 }
+.fz7 {
+  font-size: 7px;
+}
 .fz6 {
   font-size: 6px;
 }
@@ -159,6 +162,9 @@
 .c-21 {
   color: #212121;
 }
+.c-ad {
+  color: #ADADAD;
+}
 /*间距*/
 .ml-20 {
   margin-left: 20px;
@@ -166,11 +172,17 @@
 .ml-10 {
   margin-left: 10px;
 }
+.ml-6 {
+  margin-left: 6px;
+}
 .mg-10 {
   margin: 0 10px;
 }
 .mr-20 {
   margin-right: 20px;
+}
+.mr-6 {
+  margin-right: 6px;
 }
 .mr-10 {
   margin-right: 10px;
@@ -264,6 +276,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.line-th {
+  text-decoration: line-through;
+}
+.p-title {
+  border-left: 6px solid #FBAD52;
+  height: 28px;
+  line-height: 28px;
+  padding-left: 6px;
+  margin-bottom: 15px;
 }
 .arrow-right::after {
   position: absolute;

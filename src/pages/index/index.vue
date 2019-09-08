@@ -9,7 +9,7 @@
       
     </swiper>
     <div class="nav">
-      <div v-for="(item,index) in navList" :key="index" :span="4" class="nav-item fz12 text-c" @click="getMore(item.api_id)">
+      <div v-for="(item,index) in navList" :key="index" :span="4" class="nav-item fz12 text-c" @click="goPage(item.api_id)">
         <img :src="item.icon" >
         <p>{{item.title}}</p>
       </div>
@@ -25,7 +25,7 @@
           <div class="sug-item">
             <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[0].title}}</div>
             <div class="mb-10 fz12 c-21">{{suggest[0].des&&suggest[0].des}}</div>
-            <div class="sug-item-btn bg-f1" @click="getMore('0007')">立即进入 ></div>
+            <div class="sug-item-btn bg-f1" @click="getCategray('goods')">立即进入 ></div>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
           <div class="sug-item">
             <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[1].title}}</div>
             <div class="mb-10 fz12 c-21">{{suggest[1].des&&suggest[1].des}}</div>
-            <div class="sug-item-btn bg-7d"  @click="getMore('0008')">立即进入 ></div>
+            <div class="sug-item-btn bg-7d"  @click="getCategray('cat')">立即进入 ></div>
           </div>
         </div>
         <div class="suggest-bottom pr">
@@ -43,7 +43,7 @@
           <div class="sug-item">
             <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[2].title}}</div>
             <div class="mb-10 fz12 c-21">{{suggest[2].des&&suggest[2].des}}</div>
-            <div class="sug-item-btn bg-3f"  @click="getMore('0009')">立即进入 ></div>
+            <div class="sug-item-btn bg-3f"  @click="getCategray('dog')">立即进入 ></div>
           </div>
         </div>
       </div>
@@ -54,22 +54,7 @@
       <img src="../../assets/icon/more.png" alt="" class="more" @click="getMore()">
     </div>
     <div class="seckill">
-      <seckill-item :seck="seck" v-for="(seck,index) in seckillList" :key="index" @goDetail="goDetail"></seckill-item>
-      <!-- <div class="seckill-item" v-for="(seck,index) in seckillList" :key="index">
-        <div class="img-box">
-          <img :src="seck.img" alt="">
-          <img src="../../assets/icon/miaosha.png" alt="" class="icon-ms">
-        </div>
-        <div class="seckill-item-info">
-          <div class="info-title">{{seck.title}}</div>
-          <div class="price">
-            <img src="" alt="" class="icon-money">
-            <span class="sale-price">{{seck.salePrice}}</span>
-            <span class="olde-price">{{seck.oldPrice}}</span>
-            <img src="../../assets/icon/shopCar.png" alt="" class="icon-car">
-          </div>
-        </div>
-      </div> -->
+      <seckill-item :seck="seck" v-for="(seck,index) in seckillList" :key="index" @itemClick="goDetail"></seckill-item>
     </div>
     <div class="s-title good-suggest">
       <span class="ms fw-600">好物推荐</span>
@@ -121,6 +106,8 @@ export default {
         this.seckillList = res.data.Activitydictionaryy.ListArray
         this.proList = res.data.ListArray
         this.killTime = res.data.Activitydictionaryy.date
+        let sessionId = res.data.sessionId
+        wx.setStorageSync("sessionId", sessionId)
       }
     },
     spliceImg(data){
@@ -166,10 +153,46 @@ export default {
       },1000)
     },
     goDetail(id){
+      console.log(id)
       wx.navigateTo({url:'../product/main?id='+id})
     },
     getMore(type){
       wx.navigateTo({url:'../productList/main?type='+type})
+    },
+    goPage(id) {
+      switch(id) {
+        case '0001':
+          wx.navigateTo({url:'../'})
+        break
+        case '0001':
+          wx.navigateTo({url:'../'})
+        break
+        case '0001':
+          wx.navigateTo({url:'../'})
+        break
+        case '0001':
+          wx.navigateTo({url:'../'})
+        break
+        case '0001':
+          wx.navigateTo({url:'../'})
+        break
+        case '0001':
+          wx.navigateTo({url:'../'})
+        break
+        case '0011':
+          wx.navigateTo({url:'../newMember/main'})
+        break
+        case '0012':
+          wx.navigateTo({url:'../dayly/main'})
+        break
+        case '0013':
+          wx.navigateTo({url:'../exchange/main'})
+        break
+
+      }
+    },
+    getCategray(data) {
+      wx.navigateTo({url:`../${data}/main`})
     }
   },
 
