@@ -1,11 +1,13 @@
-import { request } from './request'
+import {
+  request
+} from './request'
 
 
 
 
 export default {
   async login(data) {
-    return await request('/User/Login','post',data)
+    return await request('/User/Login', 'post', data)
   },
   async getIndexData(data) {
     return await request('/Banner/list', 'get', data)
@@ -72,6 +74,15 @@ export default {
   },
   async merchandiseImg(data) {
     return await request('/MerchandiseImg/Type', 'post', data)
+  },
+  async toBuy(data) {
+    return await request('/add/Order1', 'post', data)
+  },
+  async getType(data) {
+    return await request('/brand/Type', 'post', data)
+  },
+  async getQa(data) {
+    return await request('/Issue', 'post', data)
   },
   async getEx(data) {
     return await request('/Integral/Details', 'post', data)

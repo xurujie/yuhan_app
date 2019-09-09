@@ -1,16 +1,16 @@
 <template>
   <div class="seckill-item" @click="handleClick">
     <div class="img-box">
-      <img :src="seck.grouppictures" alt="" class="pro-img">
-      <img src="../assets/icon/miaosha.png" alt="" class="icon-ms" v-if="showKill">
+      <img :src="seck.grouppictures" alt class="pro-img" />
+      <img src="../assets/icon/miaosha.png" alt class="icon-ms" v-if="showKill" />
     </div>
     <div class="seckill-item-info">
-      <div class="info-title ">{{seck.merchandise}}</div>
+      <div class="info-title">{{seck.merchandise}}</div>
       <div class="price">
         <span class="icon-money">¥</span>
         <span class="sale-price fz12">{{seck.price}}</span>
         <span class="olde-price">¥{{seck.originalprice}}</span>
-        <img src="../assets/icon/shopCar.png" alt="" class="icon-car">
+        <img src="../assets/icon/shopCar.png" alt class="icon-car" />
       </div>
     </div>
   </div>
@@ -19,19 +19,19 @@
 <script>
 export default {
   props: {
-    seck:{
-      type:Object,
+    seck: {
+      type: Object
     },
-    showKill:{
-      type:Boolean,
-      default:true
+    showKill: {
+      type: Boolean,
+      default: true
     }
   },
   methods: {
     handleClick() {
-      this.$emit('itemClick',this.seck.api_id)
+      this.$emit('itemClick', this.seck.api_id)
     }
-  },
+  }
 }
 </script>
 
@@ -46,7 +46,7 @@ export default {
     margin-right: 0;
   }
   .img-box {
-    padding: 11px 15px 48px 15px;
+    padding: 0px 15px 0px 15px;
     position: relative;
     border-bottom: 1px solid #ccc;
     .pro-img {
@@ -61,7 +61,7 @@ export default {
       bottom: 0;
     }
   }
-  .seckill-item-info{
+  .seckill-item-info {
     position: relative;
     font-size: 9px;
     padding: 0 5px;
@@ -76,15 +76,15 @@ export default {
       justify-content: baseline;
       align-items: baseline;
       .icon-money {
-        color: #FF0000;
+        color: #ff0000;
       }
       .sale-price {
-        color: #FF0000;
+        color: #ff0000;
         margin-right: 9px;
       }
       .olde-price {
         font-size: 9px;
-        color: #ADADAD;
+        color: #adadad;
         text-decoration: line-through;
       }
       .icon-car {

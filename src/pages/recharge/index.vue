@@ -1,7 +1,7 @@
 <template>
   <div class="recharge">
    <div class="ad-img">
-     <img src="../../assets/img/v9.png" alt="">
+     <img src="../../assets/img/v9.jpg" alt="">
    </div>
    <div class="r-title "><span>充值享好礼</span></div>
    <div class="recharge-main">

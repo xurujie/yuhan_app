@@ -1,49 +1,56 @@
 <template>
   <div class="container">
-  
     <s-header></s-header>
     <swiper :indicator-dots="true" class="s-swiper">
       <swiper-item v-for="(ban, index) in banner" :key="index">
-        <img :src="ban.bannerimg" class="s-img bg">
+        <img :src="ban.bannerimg" class="s-img bg" />
       </swiper-item>
-      
     </swiper>
     <div class="nav">
-      <div v-for="(item,index) in navList" :key="index" :span="4" class="nav-item fz12 text-c" @click="goPage(item.api_id)">
-        <img :src="item.icon" >
+      <div
+        v-for="(item,index) in navList"
+        :key="index"
+        :span="4"
+        class="nav-item fz12 text-c"
+        @click="goPage(item.api_id)"
+      >
+        <img :src="item.icon" />
         <p>{{item.title}}</p>
       </div>
     </div>
     <div class="join-us pr" @click="goJoin">
-      <img src="../../assets/icon/join.png" alt="">
-      <div class="btn-join" ></div>
+      <img src="../../assets/icon/join.png" alt />
+      <div class="btn-join"></div>
     </div>
     <div class="suggest">
       <div class="suggest-left pr">
-        <img :src="suggest[0].icon" >
+        <!-- <img :src="suggest[0].icon" /> -->
+        <img src="../../assets/img/good.png" alt />
         <div>
           <div class="sug-item">
-            <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[0].title}}</div>
-            <div class="mb-10 fz12 c-21">{{suggest[0].des&&suggest[0].des}}</div>
+            <!-- <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[0].title}}</div>
+            <div class="mb-10 fz12 c-21">{{suggest[0].des&&suggest[0].des}}</div>-->
             <div class="sug-item-btn bg-f1" @click="getCategray('goods')">立即进入 ></div>
           </div>
         </div>
       </div>
       <div class="suggest-right pr">
         <div class="suggest-top">
-          <img :src="suggest[1].icon" alt="">
+          <!-- <img :src="suggest[1].icon" alt /> -->
+          <img src="../../assets/img/cat.png" alt />
           <div class="sug-item">
-            <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[1].title}}</div>
-            <div class="mb-10 fz12 c-21">{{suggest[1].des&&suggest[1].des}}</div>
-            <div class="sug-item-btn bg-7d"  @click="getCategray('cat')">立即进入 ></div>
+            <!-- <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[1].title}}</div>
+            <div class="mb-10 fz12 c-21">{{suggest[1].des&&suggest[1].des}}</div>-->
+            <div class="sug-item-btn bg-7d" @click="getCategray('cat')">立即进入 ></div>
           </div>
         </div>
         <div class="suggest-bottom pr">
-          <img :src="suggest[2].icon" alt="">
+          <!-- <img :src="suggest[2].icon" alt /> -->
+          <img src="../../assets/img/dog.png" alt />
           <div class="sug-item">
-            <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[2].title}}</div>
-            <div class="mb-10 fz12 c-21">{{suggest[2].des&&suggest[2].des}}</div>
-            <div class="sug-item-btn bg-3f"  @click="getCategray('dog')">立即进入 ></div>
+            <!-- <div class="sug-item-title fw-600 fz15 mb-6">{{suggest[2].title}}</div>
+            <div class="mb-10 fz12 c-21">{{suggest[2].des&&suggest[2].des}}</div>-->
+            <div class="sug-item-btn bg-3f" @click="getCategray('dog')">立即进入 ></div>
           </div>
         </div>
       </div>
@@ -51,14 +58,19 @@
     <div class="s-title">
       <span class="ms fw-600">今日秒杀</span>
       <span class="time fz12">距本场秒杀结束剩余 {{timeStr}}</span>
-      <img src="../../assets/icon/more.png" alt="" class="more" @click="getMore()">
+      <img src="../../assets/icon/more.png" alt class="more" @click="getMore()" />
     </div>
     <div class="seckill">
-      <seckill-item :seck="seck" v-for="(seck,index) in seckillList" :key="index" @itemClick="goDetail"></seckill-item>
+      <seckill-item
+        :seck="seck"
+        v-for="(seck,index) in seckillList"
+        :key="index"
+        @itemClick="goDetail"
+      ></seckill-item>
     </div>
     <div class="s-title good-suggest">
       <span class="ms fw-600">好物推荐</span>
-      <img src="../../assets/icon/more.png"  class="more" @click="getMore()">
+      <img src="../../assets/icon/more.png" class="more" @click="getMore()" />
     </div>
     <div class="goods">
       <product-item v-for="(pro,index) in proList" :key="index" :pro="pro" @goDetail="goDetail"></product-item>
@@ -72,17 +84,17 @@ import productItem from '@/components/productItem'
 import sHeader from '@/components/s-header'
 
 export default {
-  data () {
+  data() {
     return {
-      value:'',
-      timeStr:'',
-      banner:[],
-      suggest:[],
-      navList:[],
-      seckillList:[],
-      str:'',
-      proList:[],
-      killTime:''
+      value: '',
+      timeStr: '',
+      banner: [],
+      suggest: [],
+      navList: [],
+      seckillList: [],
+      str: '',
+      proList: [],
+      killTime: ''
     }
   },
 
@@ -96,10 +108,9 @@ export default {
     this.initData()
   },
   methods: {
-    async initData(){
-      
+    async initData() {
       let res = await this.$api.getIndexData()
-      if(res.msg=="Success"){
+      if (res.msg == 'Success') {
         this.banner = res.data.banner
         this.navList = res.data.titlelcon1
         this.suggest = res.data.titlelcon2
@@ -107,18 +118,19 @@ export default {
         this.proList = res.data.ListArray
         this.killTime = res.data.Activitydictionaryy.date
         let sessionId = res.data.sessionId
-        wx.setStorageSync("sessionId", sessionId)
+        wx.setStorageSync('sessionId', sessionId)
       }
     },
-    spliceImg(data){
-      data.forEach(item=> {
-        if(item) {
-          item.grouppictures&&item.grouppictures.subString(0,item.grouppictures.length-1)
-        console.log(item.item.grouppictures,1111)
+    spliceImg(data) {
+      data.forEach(item => {
+        if (item) {
+          item.grouppictures &&
+            item.grouppictures.subString(0, item.grouppictures.length - 1)
+          console.log(item.item.grouppictures, 1111)
         }
       })
     },
-    bindViewTap () {
+    bindViewTap() {
       const url = '../logs/main'
       if (mpvuePlatform === 'wx') {
         mpvue.switchTab({ url })
@@ -127,76 +139,73 @@ export default {
       }
     },
     goJoin() {
-      mpvue.navigateTo({url:'../joinUs/main'})
+      mpvue.navigateTo({ url: '../joinUs/main' })
     },
     timeDown(endDateStr) {
-      let timer = setInterval(()=>{
+      let timer = setInterval(() => {
         // var endDate = new Date(endDateStr);
-        var endDate = endDateStr;
-        var nowDate = new Date();
-        var totalSeconds = parseInt((endDate - nowDate) / 1000);
-      if(totalSeconds<=0) {
-        clearInterval(timer)
-        this.timeStr = '00:00:00'
-      }else {
-        var days = Math.floor(totalSeconds / (60 * 60 * 24));
-        var modulo = totalSeconds % (60 * 60 * 24);
-        var hours = Math.floor(modulo / (60 * 60));
-        modulo = modulo % (60 * 60);
-        var minutes = Math.floor(modulo / 60);
-        var seconds = modulo % 60;
-        hours=hours<10?'0'+hours:hours
-        minutes=minutes<10?'0'+minutes:minutes
-        seconds=seconds<10?'0'+seconds:seconds
-        this.timeStr =   hours + ":" + minutes + ":" + seconds
-      }
-      },1000)
+        var endDate = endDateStr
+        var nowDate = new Date()
+        var totalSeconds = parseInt((endDate - nowDate) / 1000)
+        if (totalSeconds <= 0) {
+          clearInterval(timer)
+          this.timeStr = '00:00:00'
+        } else {
+          var days = Math.floor(totalSeconds / (60 * 60 * 24))
+          var modulo = totalSeconds % (60 * 60 * 24)
+          var hours = Math.floor(modulo / (60 * 60))
+          modulo = modulo % (60 * 60)
+          var minutes = Math.floor(modulo / 60)
+          var seconds = modulo % 60
+          hours = hours < 10 ? '0' + hours : hours
+          minutes = minutes < 10 ? '0' + minutes : minutes
+          seconds = seconds < 10 ? '0' + seconds : seconds
+          this.timeStr = hours + ':' + minutes + ':' + seconds
+        }
+      }, 1000)
     },
-    goDetail(id){
+    goDetail(id) {
       console.log(id)
-      wx.navigateTo({url:'../product/main?id='+id})
+      wx.navigateTo({ url: '../product/main?id=' + id })
     },
-    getMore(type){
-      wx.navigateTo({url:'../productList/main?type='+type})
+    getMore(type) {
+      wx.navigateTo({ url: '../productList/main?type=' + type })
     },
     goPage(id) {
-      switch(id) {
+      switch (id) {
         case '0001':
-          wx.navigateTo({url:'../'})
-        break
+          wx.navigateTo({ url: '../' })
+          break
+        case '0002':
+          wx.navigateTo({ url: '../productList/main' })
+          break
         case '0001':
-          wx.navigateTo({url:'../'})
-        break
+          wx.navigateTo({ url: '../' })
+          break
         case '0001':
-          wx.navigateTo({url:'../'})
-        break
+          wx.navigateTo({ url: '../' })
+          break
         case '0001':
-          wx.navigateTo({url:'../'})
-        break
+          wx.navigateTo({ url: '../' })
+          break
         case '0001':
-          wx.navigateTo({url:'../'})
-        break
-        case '0001':
-          wx.navigateTo({url:'../'})
-        break
+          wx.navigateTo({ url: '../' })
+          break
         case '0011':
-          wx.navigateTo({url:'../newMember/main'})
-        break
+          wx.navigateTo({ url: '../newMember/main' })
+          break
         case '0012':
-          wx.navigateTo({url:'../dayly/main'})
-        break
+          wx.navigateTo({ url: '../dayly/main' })
+          break
         case '0013':
-          wx.navigateTo({url:'../exchange/main'})
-        break
-
+          wx.navigateTo({ url: '../exchange/main' })
+          break
       }
     },
     getCategray(data) {
-      wx.navigateTo({url:`../${data}/main`})
+      wx.navigateTo({ url: `../${data}/main` })
     }
-  },
-
-  
+  }
 }
 </script>
 
@@ -244,7 +253,7 @@ export default {
   }
   .sug-item {
     position: absolute;
-    top: 18px;
+    top: 60px;
     left: 11px;
     .sug-item-btn {
       width: 56px;
@@ -253,6 +262,7 @@ export default {
       text-align: center;
       color: #fff;
       font-size: 9px;
+      border-radius: 8px;
     }
   }
   .suggest-left {
@@ -281,7 +291,7 @@ export default {
   align-items: center;
   height: 28px;
   line-height: 28px;
-  border-left: 6px solid #FBAD52;
+  border-left: 6px solid #fbad52;
   padding-left: 6px;
   margin-top: 24px;
   margin-bottom: 17px;
@@ -290,7 +300,7 @@ export default {
   }
   .ms {
     color: #212121;
-    font-size:15px;
+    font-size: 15px;
     margin-right: 13px;
   }
   .time {
@@ -317,13 +327,13 @@ export default {
   left: 0;
   width: 100%;
   height: 25px;
-  background-color: #ED9126;
+  background-color: #ed9126;
 }
 .btn-join {
   position: absolute;
   width: 60px;
   height: 20px;
-  right: 10px ;
+  right: 10px;
   bottom: 20px;
 }
 </style>
