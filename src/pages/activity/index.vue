@@ -38,10 +38,10 @@ export default {
   },
   methods: {
    async init() {
-     let first = this.pageSize*(this.pageNumber-1)
-     let end = this.pageSize*this.pageNumber
-     if(end>this.count) return
-     let res = await this.$api.getGoods({first,end})
+    //  let first = this.pageSize*(this.pageNumber-1)
+    //  let end = this.pageSize*this.pageNumber
+    //  if(end>this.count) return
+     let res = await this.$api.getGoods({pageNumber:this.pageNumber,pageSize:this.pageSize})
      this.count = res.data.count
      this.proList =this.proList.concat(res.data.ListArray) 
    }
@@ -77,7 +77,7 @@ page{
       padding: 0 10px;
       display: flex;
       width: 100%;
-      // justify-content: space-between;
+      justify-content: space-between;
       flex-wrap: wrap;
     }
   }

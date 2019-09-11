@@ -109,7 +109,7 @@
           <p>客服</p>
         </div>
       </div>
-      <div class="addshop bg-fb c-fff fz15 text-c">加入购物车</div>
+      <div class="addshop bg-fb c-fff fz15 text-c" @click="addShopping">加入购物车</div>
       <div class="buy bg-ef c-fff fz15 text-c" @click="buyNow">立即购买</div>
     </div>
 
@@ -132,7 +132,7 @@
             <span @click="num++">+</span>
           </div>
         </div>
-        <div class="btn bg-fb c-fff" @click="toBuy">确定</div>
+        <div class="btn bg-fb c-fff" @click="toBuy">{{isCar?'加入购物车':'确定'}}</div>
       </div>
     </van-popup>
   </div>
@@ -150,7 +150,8 @@ export default {
       proImgs: [],
       promotion: {},
       active: 0,
-      adress: {}
+      adress: {},
+      isCar:false
     }
   },
   onShow() {
@@ -172,7 +173,6 @@ export default {
       this.showPopup = true
     },
     onChange(event) {
-      console.log(event, 111)
       wx.showToast({
         title: `切换到标签 ${event.mp.detail.index + 1}`,
         icon: 'none'
@@ -184,7 +184,18 @@ export default {
     goShopCar() {
       wx.switchTab({ url: '../shopping/main' })
     },
-    toBuy() {
+    async toBuy() {
+      if(this.isCar) {
+        let res = await this.$api.addPro({merchandiseId:this.product.merchandise_id,merchandiseSum:this.num})
+        this.showPopup = this.isCar =false
+        this.num = 1
+        if(res.data.state=='1'){
+          wx.showToast('加入购物车成功')
+        }else {
+          wx.showToast('加入购物车失败')
+        }
+        return 
+      }
       wx.navigateTo({
         url:
           '../insureOrder/main?merchandiseSum=' +
@@ -192,6 +203,17 @@ export default {
           '&merchandiseId=' +
           this.product.merchandise_id
       })
+      this.num = 1
+    },
+    addShopping() {
+       let userId = wx.getStorageSync('userId')
+      if(!userId) {
+        wx.navigateTo({url:'../login/main'})
+        return 
+      }
+      this.isCar = true
+      this.showPopup = true
+
     }
   },
   computed: {

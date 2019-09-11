@@ -1,7 +1,7 @@
 <template>
   <div class="hotItem">
     <div class="left">
-      <img src="" alt="" class="label">
+      <!-- <img src="" alt="" class="label"> -->
       <img :src="pro.grouppictures" alt="" class="pro">
     </div>
     <div class="right">

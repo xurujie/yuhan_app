@@ -84,6 +84,12 @@ export default {
   async getQa(data) {
     return await request('/Issue', 'post', data)
   },
+  async exchange(data) {
+    return await request('/Integral/list', 'post', data)
+  },
+  async addPro(data) {
+    return await request('/ShoppingTrolley/add', 'post', data)
+  },
   async getEx(data) {
     return await request('/Integral/Details', 'post', data)
   },

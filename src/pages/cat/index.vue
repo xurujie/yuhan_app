@@ -1,11 +1,11 @@
 <template>
   <div class="cat">
     <div class="cat-nav">
-      <img src="../../assets/img/m1.png" alt />
-      <img src="../../assets/img/m2.png" alt />
-      <img src="../../assets/img/m3.png" alt />
-      <img src="../../assets/img/m4.png" alt />
-      <img src="../../assets/img/m5.png" alt class="middle" />
+      <img src="../../assets/img/m1.png" alt  @click="goSearch"/>
+      <img src="../../assets/img/m2.png" alt  @click="goSearch"/>
+      <img src="../../assets/img/m3.png" alt  @click="goSearch"/>
+      <img src="../../assets/img/m4.png" alt @click="goSearch" />
+      <img src="../../assets/img/m5.png" alt class="middle" @click="goSearch" />
     </div>
     <div class="p-title today">
       <span>今日特卖</span>
@@ -42,23 +42,20 @@ export default {
   },
   methods: {
     async init() {
-      let first = this.size * (this.num - 1)
-      let end = this.size * this.num
-      if (end > this.count) return
-      let res = await this.$api.getCatigray({ first, end, type: '0009' })
+      let res = await this.$api.getCatigray({ pageNumber:this.num, pageSize:this.size, type: '0009' })
       this.killList = res.data.ListArray
     },
     async getProList() {
-      let first = this.pageSize * (this.pageNumber - 1)
-      let end = this.pageSize * this.pageNumber
-      if (end > this.count) return
-      let res = await this.$api.getGoods({ first, end })
+      let res = await this.$api.getGoods({ pageSize:this.pageSize,pageNumber:this.pageNumber })
       this.count = res.data.count
       this.proList = this.proList.concat(res.data.ListArray)
     },
     changeKill() {
       this.num++
       this.init()
+    },
+    goSearch(id) {
+      wx.navigateTo({url:'../productList/main'})
     }
   },
   components: {
@@ -109,9 +106,7 @@ export default {
   .sale {
     display: flex;
     flex-wrap: wrap;
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: scroll;
+    justify-content: space-between;
     &.kill {
       .activityItem {
         &:nth-child(3n) {

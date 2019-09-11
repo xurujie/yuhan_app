@@ -1,10 +1,10 @@
 <template>
   <div class="dog">
     <div class="cat-nav">
-      <img src="../../assets/img/g1.png" alt />
-      <img src="../../assets/img/g2.png" alt />
-      <img src="../../assets/img/g3.png" alt />
-      <img src="../../assets/img/g4.png" alt />
+      <img src="../../assets/img/g1.png" alt @click="goSearch()"/>
+      <img src="../../assets/img/g2.png" alt @click="goSearch()"/>
+      <img src="../../assets/img/g3.png" alt @click="goSearch()"/>
+      <img src="../../assets/img/g4.png" alt @click="goSearch()"/>
     </div>
     <div class="p-title today">
       <span>今日特卖</span>
@@ -41,18 +41,11 @@ export default {
   },
   methods: {
     async init() {
-      let first = this.size * (this.num - 1)
-      let end = this.size * this.num
-      if (end > this.count) return
-      let res = await this.$api.getCatigray({ first, end, type: '0009' })
+      let res = await this.$api.getCatigray({ pageNumber:this.num, pageSize:this.pageNumber, type: '0009' })
       this.killList = res.data.ListArray
     },
     async getProList() {
-      let first = this.pageSize * (this.pageNumber - 1)
-      let end = this.pageSize * this.pageNumber
-      if (end > this.count) return
-      let res = await this.$api.getGoods({ first, end })
-      this.count = res.data.count
+      let res = await this.$api.getGoods({ pageNumber:this.pageNumber, pageSize:this.pageSize })
       this.proList = this.proList.concat(res.data.ListArray)
     },
     // async getTopData() {
@@ -61,6 +54,9 @@ export default {
     changeKill() {
       this.num++
       this.init()
+    },
+    goSearch(id) {
+       wx.navigateTo({url:'../productList/main'})
     }
   },
   components: {
@@ -105,13 +101,13 @@ export default {
   .sale {
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: scroll;
+    justify-content: space-between;
     &.kill {
-      .activityItem {
-        &:nth-child(3n) {
-          margin-right: 10px;
-        }
-      }
+      // .activityItem {
+      //   &:nth-child(3n) {
+      //     margin-right: 10px;
+      //   }
+      // }
     }
     &.sift {
       flex-wrap: wrap;

@@ -1,6 +1,6 @@
 <template>
   <div class="shopping">
-    <div v-if="proList.length>0">
+    <div v-if="proList.length>0" class="content">
         <item v-for="(pro, index) in proList" :key="index" :pro="pro" @sub="subClick" @add="addClick" @check="checkItem" :isCheck="isSel" @del="delPro"></item>
       <div class="footer c-64 fz13">
         <div class="left">
@@ -112,6 +112,9 @@ export default {
 
 <style lang="less">
   .shopping {
+    .content {
+      padding-bottom: 40px;
+    }
     .footer {
       position: fixed;
       bottom: 0;

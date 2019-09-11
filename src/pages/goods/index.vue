@@ -35,17 +35,13 @@ export default {
   },
   methods: {
    async init() {
-      let first = this.size*(this.num-1)
-      let end = this.size*this.num
-      if(end>this.count) return
-      let res = await this.$api.getCatigray({first,end,type:'0009'})
+      
+      let res = await this.$api.getCatigray({pageSize:this.size,pageNumber:this.num,type:'0009'})
       this.killList = res.data.ListArray
     },
     async getProList() {
-      let first = this.pageSize*(this.pageNumber-1)
-      let end = this.pageSize*this.pageNumber
-      if(end>this.count) return
-      let res = await this.$api.getGoods({first,end})
+    
+      let res = await this.$api.getGoods({pageSize:this.pageSize,pageNumber:this.pageNumber})
       this.count = res.data.count
       this.proList =this.proList.concat(res.data.ListArray) 
     },

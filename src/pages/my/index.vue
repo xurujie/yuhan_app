@@ -53,17 +53,10 @@ export default {
     }
   },
   onShow() {
-    //  wx.getUserInfo({
-    //   success: res => {
-    //       console.log(res,999)
-    //     }
-    //   })
-  },
-  onShow() {
     let sessionId = wx.getStorageSync('sessionId')
     let userId = wx.getStorageSync('userId')
     console.log(sessionId,userId,'my')
-    if(sessionId &&userId) {
+    if(sessionId && userId) {
       // this.checkLogin()
       this.init()
     }else {

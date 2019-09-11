@@ -1,7 +1,8 @@
 /**
  * 封装微信的的request
  */
-const baseUrl = 'http://49.234.133.200:8001'
+// const baseUrl = 'http://49.234.133.200:8001'
+const baseUrl = 'https://xiaocx.hbyuhan.com:8001'
 
 export function request(url, method = "GET", data,config={}) {
   console.log('sessionId', wx.getStorageSync('sessionId'));

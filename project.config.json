@@ -1,7 +1,7 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -20,7 +20,7 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wx16489f45d48b3dd6",
+	"appid": "wx7c5b20758cd2fea5",
 	"projectname": "mpshop",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},

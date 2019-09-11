@@ -7,8 +7,10 @@
       <div class="title c-21 fz9 "> {{pro.merchandise}} </div>
       <div class="footer" v-if="type=='price'">
         <img src="../assets/icon/vip-small.png" class="vip">
-        <div class="c-ff fz12">¥{{pro.price}}</div>
-        <div class="c-666 fz8">¥{{pro.originalprice}}</div>
+        <div class="text">
+          <div class="c-ff fz12">¥{{pro.price}}</div>
+          <div class="c-666 fz8">¥{{pro.originalprice}}</div>
+        </div>
         <img src="../assets/icon/shopCar.png" class="shopCar">
       </div>
       <div class="score" v-if="type== 'score'">
@@ -44,12 +46,12 @@ export default {
     width: 113px;
     background-color: #fff;
     margin-bottom: 10px;
-    margin-right: 10px;
+    // margin-right: 5px;
     &:nth-child(3n) {
       margin-right: 0;
     }
       .imgbox {
-        padding: 0 15px;
+        padding: 15px;
         .proImg {
           width: 84px;
           height: 123px;
@@ -67,6 +69,10 @@ export default {
         align-items: center;
         justify-content: space-between;
         flex-direction: row;
+        .text {
+          display: flex;
+          align-items: baseline;
+        }
         .vip {
           width: 18px;
           height: 12px;

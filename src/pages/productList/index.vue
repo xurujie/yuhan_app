@@ -47,7 +47,7 @@
 
     <!-- 产品列表 -->
     <div class="proList-cotent">
-      <div class="product-item" v-for="(pro, index) in seckillList" :key="index">
+      <div class="product-item" v-for="(pro, index) in seckillList" :key="index" @click="getProDetail(pro.merchandise_id)">
         <div class="pro-img mr-20">
           <img :src="pro.grouppictures" alt />
         </div>
@@ -113,10 +113,7 @@ export default {
   },
   methods: {
     async init() {
-      let first = this.pageSize * (this.pageNumber - 1)
-      let end = this.pageNumber * this.pageSize
-      if (end > this.count) return
-      let res = await this.$api.getCatigray({ type: '0009', first, end })
+      let res = await this.$api.getCatigray({ type: '0009', pageSize:this.pageSize, pageNumber:this.pageNumber })
       this.seckillList = res.data.ListArray
       this.count = res.data.count || ''
     },
@@ -139,6 +136,9 @@ export default {
     },
     goVip() {
       wx.navigateTo({ url: '../joinUs/main' })
+    },
+    getProDetail(id) {
+      wx.navigateTo({url:'../product/main?id='+id})
     }
   },
   component: {}

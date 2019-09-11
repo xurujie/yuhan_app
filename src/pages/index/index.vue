@@ -58,7 +58,7 @@
     <div class="s-title">
       <span class="ms fw-600">今日秒杀</span>
       <span class="time fz12">距本场秒杀结束剩余 {{timeStr}}</span>
-      <img src="../../assets/icon/more.png" alt class="more" @click="getMore()" />
+      <img src="../../assets/icon/more.png" alt class="more" @click="getMore('skill')" />
     </div>
     <div class="seckill">
       <seckill-item
@@ -70,7 +70,7 @@
     </div>
     <div class="s-title good-suggest">
       <span class="ms fw-600">好物推荐</span>
-      <img src="../../assets/icon/more.png" class="more" @click="getMore()" />
+      <img src="../../assets/icon/more.png" class="more" @click="getMore('goods')" />
     </div>
     <div class="goods">
       <product-item v-for="(pro,index) in proList" :key="index" :pro="pro" @goDetail="goDetail"></product-item>
@@ -169,38 +169,52 @@ export default {
       wx.navigateTo({ url: '../product/main?id=' + id })
     },
     getMore(type) {
-      wx.navigateTo({ url: '../productList/main?type=' + type })
+      if(type=='skill'){
+        wx.switchTab({url:'../activity/main'})
+      }else {
+        wx.navigateTo({url:'../goods/main'})
+      }
+      // wx.navigateTo({ url: '../productList/main?type=' + type })
     },
     goPage(id) {
-      switch (id) {
-        case '0001':
-          wx.navigateTo({ url: '../' })
-          break
-        case '0002':
-          wx.navigateTo({ url: '../productList/main' })
-          break
-        case '0001':
-          wx.navigateTo({ url: '../' })
-          break
-        case '0001':
-          wx.navigateTo({ url: '../' })
-          break
-        case '0001':
-          wx.navigateTo({ url: '../' })
-          break
-        case '0001':
-          wx.navigateTo({ url: '../' })
-          break
-        case '0011':
-          wx.navigateTo({ url: '../newMember/main' })
-          break
-        case '0012':
-          wx.navigateTo({ url: '../dayly/main' })
-          break
-        case '0013':
-          wx.navigateTo({ url: '../exchange/main' })
-          break
+      if(id=='0011') {
+         wx.navigateTo({ url: '../newMember/main' })
+      }else if(id=='0012') {
+         wx.navigateTo({ url: '../dayly/main' })
+      }else if(id=='0013') {
+         wx.navigateTo({ url: '../exchange/main' })
+      }else {
+        wx.navigateTo({ url: '../productList/main' })
       }
+      // switch (id) {
+      //   case '0001':
+      //     wx.navigateTo({ url: '../productList/main' })
+      //     break
+      //   case '0002':
+      //     wx.navigateTo({ url: '../productList/main' })
+      //     break
+      //   case '0003':
+      //     wx.navigateTo({ url: '../productList/main' })
+      //     break
+      //   case '0004':
+      //     wx.navigateTo({ url: '../productList/main' })
+      //     break
+      //   case '0005':
+      //     wx.navigateTo({ url: '../productList/main' })
+      //     break
+      //   case '0006':
+      //     wx.navigateTo({ url: '../productList/main' })
+      //     break
+      //   case '0011':
+      //     wx.navigateTo({ url: '../newMember/main' })
+      //     break
+      //   case '0012':
+      //     wx.navigateTo({ url: '../dayly/main' })
+      //     break
+      //   case '0013':
+      //     wx.navigateTo({ url: '../exchange/main' })
+      //     break
+      // }
     },
     getCategray(data) {
       wx.navigateTo({ url: `../${data}/main` })

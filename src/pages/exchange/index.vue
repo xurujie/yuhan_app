@@ -2,80 +2,20 @@
   <div class=" exchange">
     <div class="goods-title">精品换购</div>
     <div class="goods-main">
-      <div class="good-item bg-f">
+      <div class="good-item bg-f" v-for="(item, index) in list" :key="index">
         <div class="good-img-box line-b">
           <img src="" class="good-img">
-          <div class="good-tag">限2000个</div>
+          <div class="good-tag">限{{item.Integral.sum}}个</div>
         </div>
-        <div class="good-title c-21 fz9">宠儿香 康源益生菌5g *24 猫犬通用</div>
+        <div class="good-title c-21 fz9">{{item.merchandiseShow.merchandise}}</div>
         <div class="good-info fz9">
-           <p class="c-666">300积分+15.9</p> 
+           <p class="c-666">{{item.Integral.need_integral}}积分+{{item.Integral.need_price}}</p> 
            <div class="df vip">
              <img src="../../assets/icon/vip-small.png" class="tag-vip">
-             <p class="c-ef">230积分+12.9</p>
+             <p class="c-ef">{{item.Integral.vipneed_integral}}积分+{{item.Integral.vipneed_price}}</p>
            </div>
         </div>
         <img src="" class="shop-car">
-      </div>
-      <div class="good-item bg-f">
-        <div class="good-img-box line-b">
-          <img src="" class="good-img">
-          <div class="good-tag">限2000个</div>
-        </div>
-        <div class="good-title c-21 fz9">宠儿香 康源益生菌5g *24 猫犬通用</div>
-        <div class="good-info fz9">
-           <p class="c-666">300积分+15.9</p> 
-           <div class="df vip">
-             <img src="../../assets/icon/vip-small.png" class="tag-vip">
-             <p class="c-ef">230积分+12.9</p>
-           </div>
-        </div>
-        <img src="../../assets/icon/shopCar.png" class="shop-car">
-      </div>
-      <div class="good-item bg-f">
-        <div class="good-img-box line-b">
-          <img src="" class="good-img">
-          <div class="good-tag">限2000个</div>
-        </div>
-        <div class="good-title c-21 fz9">宠儿香 康源益生菌5g *24 猫犬通用</div>
-        <div class="good-info fz9">
-           <p class="c-666">300积分+15.9</p> 
-           <div class="df vip">
-             <img src="../../assets/icon/vip-small.png" class="tag-vip">
-             <p class="c-ef">230积分+12.9</p>
-           </div>
-        </div>
-        <img src="../../assets/icon/shopCar.png" class="shop-car">
-      </div>
-      <div class="good-item bg-f">
-        <div class="good-img-box line-b">
-          <img src="" class="good-img">
-          <div class="good-tag">限2000个</div>
-        </div>
-        <div class="good-title c-21 fz9">宠儿香 康源益生菌5g *24 猫犬通用</div>
-        <div class="good-info fz9">
-           <p class="c-666">300积分+15.9</p> 
-           <div class="df vip">
-             <img src="../../assets/icon/vip-small.png" class="tag-vip">
-             <p class="c-ef">230积分+12.9</p>
-           </div>
-        </div>
-        <img src="../../assets/icon/shopCar.png" class="shop-car">
-      </div>
-      <div class="good-item bg-f">
-        <div class="good-img-box line-b">
-          <img src="" class="good-img">
-          <div class="good-tag">限2000个</div>
-        </div>
-        <div class="good-title c-21 fz9">宠儿香 康源益生菌5g *24 猫犬通用</div>
-        <div class="good-info fz9">
-           <p class="c-666">300积分+15.9</p> 
-           <div class="df vip">
-             <img src="../../assets/icon/vip-small.png" class="tag-vip">
-             <p class="c-ef">230积分+12.9</p>
-           </div>
-        </div>
-        <img src="../../assets/icon/shopCar.png" class="shop-car">
       </div>
     </div>
   </div>
@@ -85,28 +25,23 @@
 export default {
   data() {
     return {
-      tel:'',
-      password:''
+      list:[],
+      pageSize:10,
+      pageNumber:1
     }
+  },
+  mounted() {
+    this.init()
   },
   methods: {
     goRegister() {
       wx.navigateTo({url:'../register/main'})
     },
-    async login() {
-      console.log('11111')
-      let res = await this.$api.login({tel:this.tel,password:this.password})
-      console.log('22222')
-      console.log(res,111)
-      // wx.request({
-      //   url:'http://127.0.0.1:3001/v1/login',
-      //   method:'post',
-      //   data:{
-      //     tel:this.tel,
-      //     password:this.password
-      //   }
-      // })
+    async init() {
+      let res = await this.$api.exchange({pageSize:this.pageSize,pageNumber:this.pageNumber})
+      this.list = res.data.integral
     }
+   
   },
 }
 </script>
