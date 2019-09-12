@@ -2,9 +2,12 @@
   <div class="joinUs">
     <img src="../../assets/img/join.jpg" alt />
     <div class="qa">
-      <div class="qa-item" v-for="item in list" :key="item.id">
-        <div class="title c-21 fz13 mb-10">{{item.title}}</div>
-        <div class="des c-69 fz10">{{item.answer}}</div>
+      <div class="qa-item" v-for="(item,index) in list" :key="item.id">
+        <div class="label">{{index+1}}</div>
+        <div>
+          <div class="title c-21 fz13 mb-10">{{item.title}}</div>
+          <div class="des c-69 fz10">{{item.answer}}</div>
+        </div>
       </div>
     </div>
     <div class="btn-openVip bg-fb fz15" @click="openVip">立即开通煜宠会员</div>
@@ -46,11 +49,23 @@ page {
     margin: 10px;
     background-color: #fff;
     width: 355px;
-    padding: 25px 35px;
+    padding: 25px 0px;
     margin-bottom: 30px;
     border-radius: 5px;
     .qa-item {
       margin-bottom: 20px;
+      display: flex;
+      .label {
+        width: 15px;
+        height: 15px;
+        background-color: #FB532D;
+        font-size: 15px;
+        color: #fff;
+        border-radius: 3px;
+        margin: 0 10px;
+        text-align: center;
+        line-height: 15px;
+      }
       .des {
         line-height: 15px;
       }

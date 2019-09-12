@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="index">
     <s-header></s-header>
     <swiper :indicator-dots="true" class="s-swiper">
       <swiper-item v-for="(ban, index) in banner" :key="index">

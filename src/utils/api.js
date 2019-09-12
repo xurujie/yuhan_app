@@ -90,6 +90,9 @@ export default {
   async addPro(data) {
     return await request('/ShoppingTrolley/add', 'post', data)
   },
+  async getDaly(data) {
+    return await request('/User/SignIn', 'post', data)
+  },
   async getEx(data) {
     return await request('/Integral/Details', 'post', data)
   },

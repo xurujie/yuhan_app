@@ -206,6 +206,20 @@
 					"id": -1,
 					"name": "pages/dog/main",
 					"pathName": "pages/dog/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/addcomment/main",
+					"pathName": "pages/addcomment/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/insureOrder/main",
+					"pathName": "pages/insureOrder/main",
 					"scene": null
 				}
 			]

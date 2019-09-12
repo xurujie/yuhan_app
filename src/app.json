@@ -22,6 +22,7 @@
     "pages/exchange/main",
     "pages/dog/main",
     "pages/cat/main",
+    "pages/addcomment/main",
     "pages/insureOrder/main"
   ],
   "window": {

@@ -3,16 +3,18 @@
     <div class="dayly-header">
       <img src="../../assets/img/my-bg.jpg" class="bg">
       <div class="sign">
-        <img src="" class="sign-bg">
+        <img src="../../assets/img/bg-daly.png" class="sign-bg">
         <div class="sign-content c-16">
           <div class="sign-title c-333 mb-10">已连续签到<span class="fz16 c-ff">4天</span></div>
-          <div class="sign-tip fz10 c-999"> 明日签到可获得 <span class="c-ff"> 5积分</span></div>
+          <div class="sign-tip fz10 c-999"> 明日签到可获得 <span class="c-ff"> {{signData.integral}}积分</span></div>
           <div class="days">
-            <div class="days-item"><img src="" ><span class="c-999 fz12">周一</span></div>
-            <div class="days-item"><img src="" ><span class="c-999 fz12">周一</span></div>
-            <div class="days-item"><img src="" ><span class="c-999 fz12">周一</span></div>
-            <div class="days-item"><img src="" ><span class="c-999 fz12">周一</span></div>
-            <div class="days-item"><img src="" ><span class="c-999 fz12">周一</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.monday==1"><img v-if="signData.monday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周一</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.tuesday==1"><img v-if="signData.tuesday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周二</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.wednesday==1"><img v-if="signData.wednesday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周三</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.thursday==1"><img v-if="signData.thursday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周四</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.friday==1"><img v-if="signData.friday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周五</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.saturday==1"><img v-if="signData.saturday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周六</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.sunday==1"><img v-if="signData.sunday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周日</span></div>
           </div>
         </div>
       </div>
@@ -23,24 +25,24 @@
           <p class="fz15 fw-600">积分大换购</p>
           <span class="c-ef ">小提示：积分不止能换购还能抵押现金哦</span>
         </div>
-        <img src="../../assets/icon/more.png" class="t-right">
+        <img src="../../assets/icon/more.png" class="t-right" @click="goExchange">
       </div>
       <div class="goods-box">
         <div class="good-item bg-f">
-        <div class="good-img-box">
-          <img src="" class="good-img">
-          <!-- <div class="good-tag">限2000个</div> -->
+          <div class="good-img-box">
+            <img src="" class="good-img">
+            <!-- <div class="good-tag">限2000个</div> -->
+          </div>
+          <div class="good-title c-21 fz9">宠儿香 康源益生菌5g *24 猫犬通用</div>
+          <div class="good-info fz9">
+            <p class="c-666">300积分+15.9</p> 
+            <div class="df vip">
+              <img src="../../assets/icon/vip-small.png" class="tag-vip">
+              <p class="c-ef">230积分+12.9</p>
+            </div>
+          </div>
+          <img src="" class="shop-car">
         </div>
-        <div class="good-title c-21 fz9">宠儿香 康源益生菌5g *24 猫犬通用</div>
-        <div class="good-info fz9">
-           <p class="c-666">300积分+15.9</p> 
-           <div class="df vip">
-             <img src="../../assets/icon/vip-small.png" class="tag-vip">
-             <p class="c-ef">230积分+12.9</p>
-           </div>
-        </div>
-        <img src="" class="shop-car">
-      </div>
       </div>
     </div>
   </div>
@@ -50,14 +52,31 @@
 export default {
   data() {
     return {
-     
+     signData:{},
+     list:[],
+     pageNumner:1,
+     pageSize:10
     }
+  },
+  mounted() {
+    this.getDaly()
+    this.getList()
   },
   methods: {
     goRegister() {
       wx.navigateTo({url:'../register/main'})
     },
-   
+    async getDaly() {
+      let res = await this.$api.getDaly()
+      this.signData = res.data.SignIn
+    },
+    async getList() {
+      let {data} =await this.$api.exchange({pageSize:this.pageSize,pageNumner:this.pageNumner})
+      this.list = data
+    },
+    goExchange() {
+      wx.navigateTo({url:'../exchange/main'})
+    }
   },
 }
 </script>
@@ -78,7 +97,8 @@ page {
       width: 350px;
       height: 200px;
       position: absolute;
-      left: 10px;
+      left: 50%;
+      transform: translateX(-50%);
       top: 70px; 
       .sign-bg {
         width: 350px;
@@ -88,7 +108,6 @@ page {
         position: absolute;
         top: 70px;
         left: 12px;
-        width: 100%;
         .sign-title{
 
         }
@@ -98,7 +117,6 @@ page {
         .days {
           position: absolute;
           top: 63px;
-          width: 100%;
          
           display: flex;
           justify-content: space-between;

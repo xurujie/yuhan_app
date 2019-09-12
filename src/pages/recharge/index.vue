@@ -10,12 +10,13 @@
     <div class="img-list"><img src="../../assets/img/discounts3.png" alt=""></div>
     <div class="img-list"><img src="../../assets/img/discounts4.png" alt=""></div>
     <div class="img-list last">
-      <div class="img-list-left">¥ 300</div>
+      <div class="img-list-left">¥ {{num}}</div>
       <div class="img-list-right bg-f">
         <div>300起充, 100倍数, 多充多送</div>
-        <img src="../../assets/icon/del.png" alt="">
-        <span>100</span>
-        <img src="../../assets/icon/add.png" alt="">
+        <img src="../../assets/icon/del.png" alt="" @click="del">
+        <!-- <input type="number" v-model="num"> -->
+        <span>{{num}}</span>
+        <img src="../../assets/icon/add.png" alt="" @click="add">
       </div>
     </div>
     <div class="readme ">
@@ -32,12 +33,23 @@
 export default {
   data() {
     return {
-      value:true
+      value:true,
+      num:300
     }
   },
   methods: {
     goVipInfo() {
       mpvue.navigateTo({url:'../vipInfo/main'})
+    },
+    del() {
+      if(this.num>300) {
+        this.num -=100
+      }else {
+        this.num =300
+      }
+    },
+    add() {
+      this.num+=100
     }
   },
 }
@@ -99,6 +111,9 @@ page{
           align-items: center;
           justify-content: center;
           flex: 1;
+          input {
+            width: 30px;
+          }
           div {
             margin-right: 10px;
           }
