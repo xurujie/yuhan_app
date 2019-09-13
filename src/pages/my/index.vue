@@ -96,7 +96,8 @@ export default {
           wx.navigateTo({url:'../order/main?type='})
           break
         case 'adress':
-          wx.navigateTo({url:'../order/main?type='})
+          console.log('adress')
+          wx.navigateTo({url:'../adress/main?type='})
           break
         case 'vip':
           wx.navigateTo({url:'../order/main?type='})

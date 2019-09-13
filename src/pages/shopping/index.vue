@@ -122,26 +122,13 @@ export default {
           // console.log(str)
         },
     submit() {
-      let nonceStr = 'T5agPOked4BZlWiJ'
-      let packageStr = 'prepay_id=wx121350380907284704a2eef11646329800'
-      let timeStamp = Date.now() + ''
-      let  appId = 'wx7c5b20758cd2fea5'
-      let key = 'yuhanweixinxiaochengxukaifazhexu'
-      let paySign = '3B5DF78F97E9AB7BACEC91F48E1F3D6C1544DF47A1AD57BE2010A650358A157C'
-      let obj = {nonceStr,packageStr,timeStamp,appId}
-      let sortObj = this.objKeySort(obj) 
-      // let str = this.splicingString(obj)+"&key="+key
-      // console.log(str,'str')
-      // let str = `appId=${appId}&nonceStr=${nonceStr}&package=${packageStr}&signType=MD5&timeStamp=${timeStamp}`
-      // str = str.sort()+'&key='+key
-      // let  paySign = MD5(str).toUpperCase()
-      // console.log(paySign,'paySign')
+      
       wx.requestPayment({
-        timeStamp,
-        nonceStr,
-        package:packageStr,
-        paySign,
-        signType: 'MD5',
+        timeStamp:'1568302091',
+        nonceStr:'5K8264ILTKCH16CQ2502SI8ZqweqqwS',
+        package:'prepay_id=wx122328102964072bbff02aa91328613100',
+        signType:'MD5',
+        paySign:'135AC658F42973FCEB4CEE673745CB69',
         success(res) {
           console.log(res)
         },

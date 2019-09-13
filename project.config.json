@@ -220,6 +220,13 @@
 					"id": -1,
 					"name": "pages/insureOrder/main",
 					"pathName": "pages/insureOrder/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/adress/main",
+					"pathName": "pages/adress/main",
 					"scene": null
 				}
 			]

@@ -8,7 +8,7 @@
           <div class="sign-title c-333 mb-10">已连续签到<span class="fz16 c-ff">4天</span></div>
           <div class="sign-tip fz10 c-999"> 明日签到可获得 <span class="c-ff"> {{signData.integral}}积分</span></div>
           <div class="days">
-            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.monday==1"><img v-if="signData.monday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周一</span></div>
+            <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.monday==1"><img v-if="signData.monday==1" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周一</span></div>
             <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.tuesday==1"><img v-if="signData.tuesday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周二</span></div>
             <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.wednesday==1"><img v-if="signData.wednesday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周三</span></div>
             <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.thursday==1"><img v-if="signData.thursday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周四</span></div>
@@ -16,6 +16,8 @@
             <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.saturday==1"><img v-if="signData.saturday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周六</span></div>
             <div class="days-item"><img src="../../assets/icon/btn-check.png" v-if="signData.sunday==1"><img v-if="signData.sunday==0" src="../../assets/icon/btn-unCheck.png" ><span class="c-999 fz12">周日</span></div>
           </div>
+          <!-- <div><img src="../../assets/icon/btn-sign.png" class="btn-sign"></div> -->
+          <img src="../../assets/icon/btn-sign.png" class="btn-sign">
         </div>
       </div>
     </div>
@@ -103,11 +105,21 @@ page {
       .sign-bg {
         width: 350px;
         height: 200px;
+        
       }
       .sign-content {
         position: absolute;
-        top: 70px;
+        top: 10px;
         left: 12px;
+        width: 350px;
+        .btn-sign {
+          width: 80px;
+          height: 36px;
+          position: absolute;
+          top: 135px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
         .sign-title{
 
         }
