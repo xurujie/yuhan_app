@@ -93,6 +93,9 @@ export default {
   async getDaly(data) {
     return await request('/User/SignIn', 'post', data)
   },
+  async getOrderInfo(data) {
+    return await request('/add/Order1', 'post', data)
+  },
   async getEx(data) {
     return await request('/Integral/Details', 'post', data)
   },

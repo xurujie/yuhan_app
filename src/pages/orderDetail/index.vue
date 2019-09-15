@@ -75,6 +75,7 @@ export default {
   },
   mounted() {
     this.init()
+    
   },
   methods: {
     async init() {

@@ -163,7 +163,7 @@ export default {
     let res = await this.$api.proDetail({ MerchandiseId: '100001' })
     if (res.msg == 'Success') {
       this.product = res.data.Merchandise
-      this.proImgs = res.data.Merchandise.grouppictures.split(';')
+      this.proImgs = res.data.Merchandise.grouppictures
       this.promotion = res.data.Promotion
       this.adress = res.data.Profile
     }
@@ -233,7 +233,7 @@ page {
   background-color: #f8f8f8;
 }
 .product {
-  padding-top: 20px;
+  // padding-top: 20px;
   padding-bottom: 50px;
   background-color: #f8f8f8;
   swiper {

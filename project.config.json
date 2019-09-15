@@ -20,7 +20,7 @@
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wx7c5b20758cd2fea5",
+	"appid": "wx367411514ee953d5",
 	"projectname": "mpshop",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
@@ -227,6 +227,13 @@
 					"id": -1,
 					"name": "pages/adress/main",
 					"pathName": "pages/adress/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/insureOrder/main",
+					"pathName": "pages/insureOrder/main",
 					"scene": null
 				}
 			]

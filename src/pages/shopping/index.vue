@@ -124,11 +124,11 @@ export default {
     submit() {
       
       wx.requestPayment({
-        timeStamp:'1568302091',
+        timeStamp:'1568476736',
         nonceStr:'5K8264ILTKCH16CQ2502SI8ZqweqqwS',
-        package:'prepay_id=wx122328102964072bbff02aa91328613100',
+        package:'prepay_id=wx14235857521658e467317f2f1654465400',
         signType:'MD5',
-        paySign:'135AC658F42973FCEB4CEE673745CB69',
+        paySign:'D997B869E5EA8F181C798AB07EBA6987',
         success(res) {
           console.log(res)
         },
