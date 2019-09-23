@@ -1,6 +1,6 @@
 <template>
   <div class="insureOrder">
-    <van-cell title="收货人" is-link  ></van-cell>
+    <van-cell title="收货人" is-link custom-class="shop-name" ></van-cell>
     <van-cell title=" 煜宠商城品牌直营：" custom-class="shop-name"  ></van-cell>
     <insure :pro="pro"></insure>
     <van-cell title=" 优惠券" custom-class="shop-name" is-link :value="coupon" ></van-cell>
@@ -43,7 +43,10 @@ export default {
       express:8,
       remant:0,
       coupon:'暂无优惠券可用',
-      Promotion:{}
+      Promotion:{},
+      mPrice :'',
+      sumPrice:'',
+      Profile:{}
     }
   },
   mounted() {
@@ -60,6 +63,7 @@ export default {
       this.pro= res.data.merchandise
       this.balance = res.data.balance
       this.integral = res.data.integral
+      this.Profile = res.data.Profile
       if(this.score/100>this.pro.price*this.$root.$mp.query.merchandiseSum) {
         this.score = this.pro.price*this.$root.$mp.query.merchandiseSum*100
       }
@@ -76,8 +80,50 @@ export default {
        this.score = 0
      }
     },
-    submitOrder() {
-      console.log('order')
+    async submitOrder() {
+      let _this = this
+      let obj = {
+        merchandiseId: this.pro.merchandise_id,
+        merchandiseSum: this.$root.$mp.query.merchandiseSum,
+        useCoupon:0,
+        fullDiscount: this.Promotion.id,
+        usingIntegrals: this.score,
+        balanceDeduction: this.remant,
+        mPrice: this.mPrice,
+        expressFee: this.express,
+        sumPrice: this.sumPrice ,
+        receivingAddress: this.Profile.id,
+      }
+      let res = await this.$api.genertateOrder(obj)
+      if(res.data.orderNumber) {
+        let {data} = await this.$api.getSign({orderNumber:res.data.orderNumber})
+        // wx.login({
+          //  async success(res) {
+          //  console.log(res.code,'res')
+            // let data = await  _this.$api.getOpenId({code:res.code})
+            console.log(data,'data')
+            wx.requestPayment({
+              timeStamp:data.timeStamp,
+              nonceStr:data.nonceStr,
+              package:data.package,
+              signType:'MD5',
+              paySign:data.paySign,
+              success(res) {
+                console.log(res)
+              },
+              fail(err) {
+                console.log(err)
+              }
+            })
+        //   }
+        // })
+        // wx.navigateTo({url:'../order/main'})
+      }else {
+        wx.showToast({
+          title:'订单生成失败',
+          icon:'error'
+        })
+      }
     },
     changeScore() {
       if(this.score>this.integral) {
@@ -96,8 +142,6 @@ export default {
        
         price = (price - reduce).toFixed(2)
       }
-      console.log(price,'price')
-      console.log(this.ischeck)
       if(this.ischeck) {
        
         if(this.balance/1>= price/1) {
@@ -117,10 +161,9 @@ export default {
         res = (price - this.score/100).toFixed(2)
         
       }
-
-      
-      console.log(res,'res')
-      console.log(this.remant,'remant')
+      this.mPrice = res
+      res = res + this.express
+      this.sumPrice = res
       return res
     }
   },

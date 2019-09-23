@@ -24,6 +24,7 @@
     "pages/cat/main",
     "pages/addcomment/main",
     "pages/adress/main",
+    "pages/addAdress/main",
     "pages/insureOrder/main"
   ],
   "window": {

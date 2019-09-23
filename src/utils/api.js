@@ -96,6 +96,15 @@ export default {
   async getOrderInfo(data) {
     return await request('/add/Order1', 'post', data)
   },
+  async genertateOrder(data) {
+    return await request('/verifyOrder', 'post', data)
+  },
+  async getOpenId(data) {
+    return await request('/obtain/openId', 'post', data)
+  },
+  async getSign(data) {
+    return await request('/obtain/sign', 'post', data)
+  },
   async getEx(data) {
     return await request('/Integral/Details', 'post', data)
   },

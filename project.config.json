@@ -234,6 +234,13 @@
 					"id": -1,
 					"name": "pages/insureOrder/main",
 					"pathName": "pages/insureOrder/main",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/addAdress/main",
+					"pathName": "pages/addAdress/main",
 					"scene": null
 				}
 			]
