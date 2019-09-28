@@ -1,5 +1,8 @@
 {
   "navigationStyle":"default",
   "navigationBarTextStyle":"black",
-  "navigationBarTitleText": "我的资料"
+  "navigationBarTitleText": "我的资料",
+  "usingComponents": {
+    "van-area": "/static/vant/area/index"
+  }
 }

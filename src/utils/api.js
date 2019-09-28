@@ -105,6 +105,18 @@ export default {
   async getSign(data) {
     return await request('/obtain/sign', 'post', data)
   },
+  async addAdress(data) {
+    return await request('/add/profile', 'post', data)
+  },
+  async updateAdress(data) {
+    return await request('/update/profile', 'post', data)
+  },
+  async delAdress(data) {
+    return await request('/delete/profile', 'post', data)
+  },
+  async getAdressList(data) {
+    return await request('/findByUserId/profile', 'post', data)
+  },
   async getEx(data) {
     return await request('/Integral/Details', 'post', data)
   },

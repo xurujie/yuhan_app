@@ -1,6 +1,6 @@
 <template>
   <div class="insureOrder">
-    <van-cell title="收货人" is-link custom-class="shop-name" ></van-cell>
+    <van-cell title="收货人" is-link custom-class="shop-name" @click="toAdress"></van-cell>
     <van-cell title=" 煜宠商城品牌直营：" custom-class="shop-name"  ></van-cell>
     <insure :pro="pro"></insure>
     <van-cell title=" 优惠券" custom-class="shop-name" is-link :value="coupon" ></van-cell>
@@ -8,13 +8,13 @@
     <van-cell title=" 配送方式" custom-class="shop-name" is-link value="普通快递"></van-cell>
     <!-- <van-cell title=" 余额抵扣 " custom-class="shop-name" is-link value="暂无优惠券可用" ></van-cell>
     <van-cell title="积分抵扣 " custom-class="shop-name" is-link value="暂无优惠券可用" ></van-cell> -->
-    <div class="cell money c-9d fz9 mt-10 mb-3">
+    <div class="cell money c-9d fz15 mt-10 mb-3">
       <div class="c-9d"><span class="mr-10">余额抵扣&nbsp;(默认使用)</span><span>已抵扣{{remant}}元，当前余额{{bal}}元</span></div>
       <div>
         <switch :checked="!isCheck"  @change="change" />
       </div>
     </div>
-    <div class="cell money c-9d fz13 ">
+    <div class="cell money c-9d fz15 ">
       <div class="c-9d"><span>积分抵扣</span></div>
       <div class="c-9d cell-input">
         <span class="mr-20">每100积分抵扣1元，当前{{integral}}积分</span>
@@ -51,8 +51,14 @@ export default {
   },
   mounted() {
     this.init()
-   
-    
+   let _this = this
+    wx.login({
+       success(res) {
+        _this.$api.getOpenId({code:res.code}).then(res=> {
+          console.log(res)
+        })
+      }
+    })
   },
   methods: {
     async  init() {
@@ -82,6 +88,7 @@ export default {
     },
     async submitOrder() {
       let _this = this
+      
       let obj = {
         merchandiseId: this.pro.merchandise_id,
         merchandiseSum: this.$root.$mp.query.merchandiseSum,
@@ -96,27 +103,21 @@ export default {
       }
       let res = await this.$api.genertateOrder(obj)
       if(res.data.orderNumber) {
-        let {data} = await this.$api.getSign({orderNumber:res.data.orderNumber})
-        // wx.login({
-          //  async success(res) {
-          //  console.log(res.code,'res')
-            // let data = await  _this.$api.getOpenId({code:res.code})
-            console.log(data,'data')
-            wx.requestPayment({
-              timeStamp:data.timeStamp,
-              nonceStr:data.nonceStr,
-              package:data.package,
-              signType:'MD5',
-              paySign:data.paySign,
-              success(res) {
-                console.log(res)
-              },
-              fail(err) {
-                console.log(err)
-              }
-            })
-        //   }
-        // })
+         
+        let {data} = await _this.$api.getSign({orderNumber:res.data.orderNumber})
+        wx.requestPayment({
+          timeStamp:data.timeStamp,
+          nonceStr:data.nonceStr,
+          package:data.package,
+          signType:'MD5',
+          paySign:data.paySign,
+          success(res) {
+            console.log(res)
+          },
+          fail(err) {
+            console.log(err)
+          }
+        })
         // wx.navigateTo({url:'../order/main'})
       }else {
         wx.showToast({
@@ -131,6 +132,9 @@ export default {
       }else if(this.score<0) {
         this.score = 0
       }
+    },
+    toAdress() {
+      wx.navigateTo({url:'../addAdress/main'})
     }
   },
   computed: {
@@ -146,7 +150,7 @@ export default {
        
         if(this.balance/1>= price/1) {
           this.remant = price
-          this.bal = this.balance -price
+          this.bal = (this.balance -price).toFixed(2)
           res = 0
           
         }else {
@@ -190,6 +194,9 @@ page {
       justify-content: space-between;
       height: 50px;
       line-height: 50px;
+      &.money {
+        font-size: 10px;
+      }
       switch {
         zoom: 0.6;
       }
